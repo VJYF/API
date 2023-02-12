@@ -1,6 +1,6 @@
 <?php
 
-class Tag{
+class Tags{
 
     private $connection;
     private $table = "tags";
@@ -70,31 +70,26 @@ class Tag{
 
     public function create(){
 
-        //$sql = "INSERT INTO " . $this->table . " SET name=:name, details=:details, price=:price, tag_id=:tag_id";
+        //$sql = "INSERT INTO " . $this->table . " SET name=:name, details=:details";
 
-        $sql = "INSERT INTO " . $this->table . " (name, details, price, tag_id) VALUES (:name, :details, :price, :tag_id)";
+        $sql = "INSERT INTO " . $this->table . " (name, details) VALUES (:name, :details)";
 
 
         $query = $this->connection->prepare($sql);
 
         $this->name=htmlspecialchars(strip_tags($this->name));
         $this->details=htmlspecialchars(strip_tags($this->details));
-        $this->price=htmlspecialchars(strip_tags($this->price));
-        $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
-        //$this->created_at=htmlspecialchars(strip_tags($this->created_at));
 
         $query->bindParam(":name", $this->name);
         $query->bindParam(":details", $this->details);
-        $query->bindParam(":price", $this->price);
-        $query->bindParam(":tag_id", $this->tag_id);
-        //$query->bindParam(":created_at", $this->created_at);
-        //return $query;
+
+        //print_r($query);
         //die();
         
         if($query->execute()){
             return true;
         }
-        echo  $query;
+        //echo  $query;
         return false;
 
     }
@@ -128,21 +123,17 @@ class Tag{
 
     public function update(){
 
-        $sql = "UPDATE " . $this->table . " SET name = :name, price = :price, details = :details, tag_id = :tag_id WHERE id = :id";
+        $sql = "UPDATE " . $this->table . " SET name = :name, details = :details WHERE id = :id";
 
-        $query = $this->connnection-prepare($sql);
+        $query = $this->connection->prepare($sql);
 
-        $this->name=htmlspecialchars(strip_tags($this->name));
-        $this->price=htmlspecialchars(strip_tags($this->price));
-        $this->details=htmlspecialchars(strip_tags($this->details));
-        $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
         $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->name=htmlspecialchars(strip_tags($this->name));
+        $this->details=htmlspecialchars(strip_tags($this->details));
 
-        $query->bindParam(':name', $this->name);
-        $query->bindParam(':price', $this->price);
-        $query->bindParam(':details', $this->details);
-        $query->bindParam(':tag_id', $this->tag_id);
         $query->bindParam(':id', $this->id);
+        $query->bindParam(':name', $this->name);
+        $query->bindParam(':details', $this->details);
 
         if($query->execute()){
             return true;

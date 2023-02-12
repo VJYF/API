@@ -84,20 +84,15 @@ class Products{
         $this->details=htmlspecialchars(strip_tags($this->details));
         $this->price=htmlspecialchars(strip_tags($this->price));
         $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
-        //$this->created_at=htmlspecialchars(strip_tags($this->created_at));
 
         $query->bindParam(":name", $this->name);
         $query->bindParam(":details", $this->details);
         $query->bindParam(":price", $this->price);
         $query->bindParam(":tag_id", $this->tag_id);
-        //$query->bindParam(":created_at", $this->created_at);
-        //return $query;
-        //die();
-        
+
         if($query->execute()){
             return true;
         }
-        echo  $query;
         return false;
 
     }
@@ -133,19 +128,19 @@ class Products{
 
         $sql = "UPDATE " . $this->table . " SET name = :name, price = :price, details = :details, tag_id = :tag_id WHERE id = :id";
 
-        $query = $this->connnection-prepare($sql);
+        $query = $this->connection->prepare($sql);
 
-        $this->name=htmlspecialchars(strip_tags($this->name));
-        $this->price=htmlspecialchars(strip_tags($this->price));
-        $this->details=htmlspecialchars(strip_tags($this->details));
-        $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
         $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->name=htmlspecialchars(strip_tags($this->name));
+        $this->details=htmlspecialchars(strip_tags($this->details));
+        $this->price=htmlspecialchars(strip_tags($this->price));
+        $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
 
-        $query->bindParam(':name', $this->name);
-        $query->bindParam(':price', $this->price);
-        $query->bindParam(':details', $this->details);
-        $query->bindParam(':tag_id', $this->tag_id);
         $query->bindParam(':id', $this->id);
+        $query->bindParam(':name', $this->name);
+        $query->bindParam(':details', $this->details);
+        $query->bindParam(':price', $this->price);
+        $query->bindParam(':tag_id', $this->tag_id);
 
         if($query->execute()){
             return true;

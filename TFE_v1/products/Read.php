@@ -2,15 +2,15 @@
 // Headers requis
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// On vérifie la méthode
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+// On vérifie que la méthode utilisée est correcte
+if($_SERVER['REQUEST_METHOD'] == 'GET'){
     // On inclut les fichiers de configuration et d'accès aux données
     include_once '../config/Database.php';
-    include_once '../models/Produits.php';
+    include_once '../models/Product.php';
 
     // On instancie la base de données
     $database = new Database();
@@ -19,29 +19,38 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // On instancie les produits
     $product = new Products($db);
 
-    // On récupère les informations envoyées
-    $data = json_decode(file_get_contents("php://input"));
-    
-    if(!empty($data->name) && !empty($data->description) && !empty($data->prix) && !empty($data->categories_id)){
-        // Ici on a reçu les données
-        // On hydrate notre objet
-        $product->name = $data->name;
-        $product->description = $data->description;
-        $product->prix = $data->prix;
-        $product->categories_id = $data->categories_id;
+    // On récupère les données
+    $stmt = $product->read();
 
-        if($produit->creer()){
-            // Ici la création a fonctionné
-            // On envoie un code 201
-            http_response_code(201);
-            echo json_encode(["message" => "L'ajout a été effectué"]);
-        }else{
-            // Ici la création n'a pas fonctionné
-            // On envoie un code 503
-            http_response_code(503);
-            echo json_encode(["message" => "L'ajout n'a pas été effectué"]);         
+    // On vérifie si on a au moins 1 produit
+    if($stmt->rowCount() > 0){
+        // On initialise un tableau associatif
+        $Products = [];
+        $Products['products'] = [];
+
+        // On parcourt les produits
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            extract($row);
+
+            $product = [
+                "id" => $id,
+                "name" => $name,
+                "details" => $details,
+                "price" => $price,
+                "tag_id" => $tag_id,
+                "tag_name" => $tag_name
+            ];
+
+            $tableauProducts['products'][] = $product;
         }
+
+        // On envoie le code réponse 200 OK
+        http_response_code(200);
+
+        // On encode en json et on envoie
+        echo json_encode($tableauProducts);
     }
+
 }else{
     // On gère l'erreur
     http_response_code(405);

@@ -16,16 +16,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $product = new Products($db);
     
     $data = json_decode(file_get_contents("php://input"));
+    echo json_encode(["data" =>  $data]);
     //echo json_encode(["message" =>  "IF "]);
-    //echo json_encode(["data" =>  $data]);
-    //echo json_encode(["product" =>  $product]);
-
+    
     if(!empty($data->name) && !empty($data->details) && !empty($data->price) && !empty($data->tag_id)){
         
         $product->name = $data->name;
         $product->details = $data->details;
         $product->price = $data->price;
         $product->tag_id = $data->tag_id;
+        echo json_encode(["product " =>  $product]);
 
         if($product->create()){
             

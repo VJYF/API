@@ -16,15 +16,16 @@ if($_SERVER['REQUEST_METHOD'] == 'PUT'){
     $product = new Products($db);
 
     $data = json_decode(file_get_contents("php://input"));
-    print_r($product);  
+    //echo json_encode(["data" =>  $data]);
     
-    if(!empty($data->id) && !empty($data->name) && !empty($data->details) && !empty($data->price) && !empty($data->tag_id)){
+    if(!empty($data->id)){
         
-        $product->name = $data->name;
-        $product->price = $data->price;
-        $product->details = $data->details;
-        $product->tag_id = $data->tag_id;
         $product->id = $data->id;
+        $product->name = $data->name;
+        $product->details = $data->details;
+        $product->price = $data->price;
+        $product->tag_id = $data->tag_id;
+        echo json_encode(["product " =>  $product]);
         
         if($product->update()){
             
