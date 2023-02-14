@@ -1,14 +1,14 @@
-LOGIN - SIGNIN
--Compte client
+LOGIN - SIGNIN<br>
+-Compte client<br>
 
 
-NEWSLETTER 
--email promo à faire en dure
+NEWSLETTER <br>
+-email promo à faire en dure <br>
 
-RESERVATION
--Demande de rdv pour 1 soins
--email de confirmation
--Rappel
+RESERVATION<br>
+-Demande de rdv pour 1 soins<br>
+-email de confirmation<br>
+-Rappel<br>
 -Notification admin
 
 
