@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $product = new Products($db);
     
     $data = json_decode(file_get_contents("php://input"));
-    echo json_encode(["data" =>  $data]);
+    //echo json_encode(["data" =>  $data]);
     //echo json_encode(["message" =>  "IF "]);
     
     if(!empty($data->name) && !empty($data->details) && !empty($data->price) && !empty($data->tag_id)){
@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $product->details = $data->details;
         $product->price = $data->price;
         $product->tag_id = $data->tag_id;
-        echo json_encode(["product " =>  $product]);
+        echo json_encode(["New product " =>  $product]);
 
         if($product->create()){
             
@@ -38,6 +38,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             echo json_encode(["message" => "L'ajout n'a pas été effectué"]);
 
         }
+    }else{
+
+        http_response_code(503);
+        echo json_encode(["message" => "Requête non valide"]);  
     }
 
 }else{

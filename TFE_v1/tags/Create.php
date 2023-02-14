@@ -34,6 +34,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             echo json_encode(["message" => "L'ajout n'a pas été effectué"]);
 
         }
+    }else{
+
+        http_response_code(503);
+        echo json_encode(["message" => "Requête non valide"]);  
     }
 
 }else{
