@@ -1,0 +1,23 @@
+.l-card{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.inner-l-card{
+      display: flex;
+}
+
+.name{
+
+    margin-right: 5px;
+    font-size: 22px;
+}
+.time{
+    font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+
+}

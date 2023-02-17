@@ -19,11 +19,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //echo json_encode(["data" =>  $data]);
     //echo json_encode(["message" =>  "IF "]);
     
-    if(!empty($data->name) && !empty($data->details) && !empty($data->price) && !empty($data->tag_id)){
+    if(!empty($data->name) && !empty($data->details) && !empty($data->price) && !empty($data->tag_id) && !empty($data->time)){
         
         $product->name = $data->name;
         $product->details = $data->details;
         $product->price = $data->price;
+        $product->time = $data->time;
         $product->tag_id = $data->tag_id;
         echo json_encode(["New product " =>  $product]);
 

@@ -37,6 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 "name" => $name,
                 "details" => $details,
                 "price" => $price,
+                "time" => $time,
                 "tag_id" => $tag_id,
                 "tag_name" => $tag_name
             ];

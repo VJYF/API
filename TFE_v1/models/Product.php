@@ -9,6 +9,7 @@ class Products{
     public $name;
     public $details;
     public $price;
+    public $time;
     public $tag_id;
     public $tag_name;
     public $created_at;
@@ -32,7 +33,7 @@ class Products{
 
     public function read(){
 
-        $sql = "SELECT t.name as tag_name, p.id, p.name, p.details, p.price, p.tag_id, p.created_at FROM " . $this->table . " p LEFT JOIN tags t ON p.tag_id = t.id ORDER BY p.created_at DESC";
+        $sql = "SELECT t.name as tag_name, p.id, p.name, p.details, p.price, p.time, p.tag_id, p.created_at FROM " . $this->table . " p LEFT JOIN tags t ON p.tag_id = t.id ORDER BY p.created_at DESC";
 
         $query = $this->connection->prepare($sql);
         $query->execute();
@@ -49,7 +50,7 @@ class Products{
 
     public function readOne(){
 
-        $sql = "SELECT t.name as tag_name, p.id, p.name, p.details, p.price, p.tag_id, p.created_at FROM " . $this->table . " p LEFT JOIN tags t ON p.tag_id = t.id WHERE p.id = ? LIMIT 0,1";
+        $sql = "SELECT t.name as tag_name, p.id, p.name, p.details,p.time, p.price, p.tag_id, p.created_at FROM " . $this->table . " p LEFT JOIN tags t ON p.tag_id = t.id WHERE p.id = ? LIMIT 0,1";
 
         $query = $this->connection->prepare($sql);
         $query->bindParam(1, $this->id);
@@ -60,6 +61,7 @@ class Products{
         $this->name = $row['name'];
         $this->price = $row['price'];
         $this->details = $row['details'];
+        $this->time = $row['time'];
         $this->tag_id = $row['tag_id'];
         $this->tag_name = $row['tag_name'];
 
@@ -75,7 +77,7 @@ class Products{
 
         //$sql = "INSERT INTO " . $this->table . " SET name=:name, details=:details, price=:price, tag_id=:tag_id";
 
-        $sql = "INSERT INTO " . $this->table . " (name, details, price, tag_id) VALUES (:name, :details, :price, :tag_id)";
+        $sql = "INSERT INTO " . $this->table . " (name, details, price, time, tag_id) VALUES (:name, :details, :price, :time, :tag_id)";
 
 
         $query = $this->connection->prepare($sql);
@@ -83,11 +85,13 @@ class Products{
         $this->name=htmlspecialchars(strip_tags($this->name));
         $this->details=htmlspecialchars(strip_tags($this->details));
         $this->price=htmlspecialchars(strip_tags($this->price));
+        $this->time=htmlspecialchars(strip_tags($this->time));
         $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
 
         $query->bindParam(":name", $this->name);
         $query->bindParam(":details", $this->details);
         $query->bindParam(":price", $this->price);
+        $query->bindParam(":time", $this->time);
         $query->bindParam(":tag_id", $this->tag_id);
 
         if($query->execute()){
@@ -126,7 +130,7 @@ class Products{
 
     public function update(){
 
-        $sql = "UPDATE " . $this->table . " SET name = :name, price = :price, details = :details, tag_id = :tag_id WHERE id = :id";
+        $sql = "UPDATE " . $this->table . " SET name = :name, price = :price, details = :details, time = :time, tag_id = :tag_id WHERE id = :id";
 
         $query = $this->connection->prepare($sql);
 
@@ -134,11 +138,13 @@ class Products{
         $this->name=htmlspecialchars(strip_tags($this->name));
         $this->details=htmlspecialchars(strip_tags($this->details));
         $this->price=htmlspecialchars(strip_tags($this->price));
+        $this->time=htmlspecialchars(strip_tags($this->time));
         $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
 
         $query->bindParam(':id', $this->id);
         $query->bindParam(':name', $this->name);
         $query->bindParam(':details', $this->details);
+        $query->bindParam(':time', $this->time);
         $query->bindParam(':price', $this->price);
         $query->bindParam(':tag_id', $this->tag_id);
 

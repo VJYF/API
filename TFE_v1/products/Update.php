@@ -24,6 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'PUT'){
         $product->name = $data->name;
         $product->details = $data->details;
         $product->price = $data->price;
+        $product->time = $data->time;
         $product->tag_id = $data->tag_id;
         echo json_encode(["product " =>  $product]);
         
@@ -40,6 +41,10 @@ if($_SERVER['REQUEST_METHOD'] == 'PUT'){
             
         }
 
+    }else{
+
+        http_response_code(503);
+        echo json_encode(["message" => "Requête non valide"]);  
     }
  
 }else{
