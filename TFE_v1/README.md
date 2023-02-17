@@ -6,7 +6,8 @@ RESERVATION<br>
 -Demande de rdv pour 1 soins<br>
 -email de confirmation<br>
 -Rappel<br>
--Notification admin
+-Notification admin<br>
 
 BOUTIQUE<br>
 -login signin
+-CRUD produit 
