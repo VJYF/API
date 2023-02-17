@@ -1,6 +1,3 @@
-LOGIN - SIGNIN<br>
--Compte client<br>
-
 
 NEWSLETTER <br>
 -email promo à faire en dure <br>
@@ -11,6 +8,5 @@ RESERVATION<br>
 -Rappel<br>
 -Notification admin
 
-
-BOUTIQUE
--
+BOUTIQUE<br>
+-login signin
