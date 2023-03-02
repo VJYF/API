@@ -1,0 +1,127 @@
+h2{
+    align-items: center;
+}
+
+/******************************************/
+/* SECTIONS'S SHOP*/
+#tags{
+    display: flex;
+    justify-content: center;
+}
+#prods{
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container-tags{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.main-tag{
+    width: 80%;
+}
+/******************************************/
+/* TAG'S BUTTONS */
+.tag_box{
+    display: flex;
+    width: auto;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e90ff;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.tag_box:hover{
+    background-color: #0077b6;
+    border-radius: 15px;
+}
+.tag_box:active{
+    background-color: rgb(250, 250, 250);
+    color:black;
+    border-radius: 15px;
+}
+
+.reset_box{
+    display: flex;
+    width: 150px;
+    min-height: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e90ff;
+    color:white;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.reset_box:hover{
+    background-color: #0077b6;
+    border-radius: 15px;
+}
+
+
+/******************************************/
+/* PRODUCT'S SHOP CARD */
+.box_product{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: 350px;
+    border: solid 3px #0077b6;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 15px;
+    background-color: #e9e9e9;
+}
+
+.box-l{
+    width: 80%;
+    height: 100%;
+    display: inline;
+    display: grid;
+    align-items: stretch;
+    justify-items: center;
+}
+
+.box-r{
+    width: 20%;
+    height: 100%;
+    display: grid;
+    align-content: stretch;
+    align-items: center;
+    margin: 10px;
+
+}
+
+.box-t{
+    font-size: 22px;
+}
+
+.box-d{
+    color:black;
+    font-size: 14px;
+}
+
+.box-p{
+    color:#1e90ff;
+}
+
+
+
+/* 
+                <div class="box_product">
+                    <div class="box-l">
+                        <div class="box-inner box-t">`+products.name+`<img src="test.jpg" /></div>
+                        <div class="box-inner box-d">`+products.details+`</div>
+                        <div class="box-inner box-p">`+products.price+`</div>
+                    </div>
+                </div>
+*/
